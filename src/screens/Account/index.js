@@ -1,25 +1,14 @@
 //import liraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { Text, View } from 'react-native';
 
 // create a component
 const Account = () => {
     return (
-        <View style={styles.container}>
+        <View>
             <Text>Account</Text>
         </View>
     );
 };
 
-// define your styles
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#2c3e50',
-    },
-});
-
-//make this component available to the app
 export default Account;
