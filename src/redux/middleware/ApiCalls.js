@@ -1,6 +1,6 @@
 const promiseMiddleware = () => {
     return next => action => {
-        const {promise,type, ...rest} = action;
+        const { promise, type, ...rest} = action;
 
         if(!promise) return next(action);
 
@@ -8,16 +8,18 @@ const promiseMiddleware = () => {
         const REQUEST = type + 'REQUEST';
         const FAILURE = type + '_FAILURE';
 
-        next({...rest,type: REQUEST});
-
+        next({ ...rest, type: REQUEST});
+        
         return promise
-         .then(response => {
-            next({...rest, response:response, type:SUCCESS});
-            return true;
-         }).catch(error =>{
-            next({...rest, error,type:FAILURE});
-            return false;
-         });
+            .then(response => {
+                next({ ...rest, response: response, type: SUCCESS });
+                return true;
+            }).catch(error => {
+                next({ ...rest, error, type: FAILURE });
+                return false;
+            });
+
+
     };
 };
 

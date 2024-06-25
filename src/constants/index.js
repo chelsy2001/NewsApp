@@ -1,3 +1,3 @@
 export default {
-    AsyncStorageKey:"NewsApp001"
+    AsyncStorageKey:"NewApp001"
 }

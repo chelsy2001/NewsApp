@@ -1,19 +1,25 @@
 import {persistCombineReducers} from 'redux-persist';
-import constants from '../constants';
+import Constants from '../../constants/index';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import exampleReducer from './exampleReducer';
 
 const config = {
-    key: constants.AsyncStorageKey,
-    storage:AsyncStorage,
+    key: Constants.AsyncStorageKey,
+    storage: AsyncStorage,
     blacklist: []
 }
 
-const appReducer = persistCombineReducers(config,{
 
+
+const appReducer = persistCombineReducers(config, {
+    example: exampleReducer,
 });
 
-const rootReducer = (state,action) => {
-    return appReducer(state,action);
+
+const rootReducer = (state, action) => {
+    return appReducer(state, action);
 }
+
+
 
 export default rootReducer;
