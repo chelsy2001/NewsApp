@@ -1,7 +1,8 @@
 //import liraries
 import { useNavigation } from '@react-navigation/native';
-import React, { Component, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, View } from 'react-native';
+import {styles} from './styles';
 
 // create a component
 const SplashScreen = () => {
@@ -15,14 +16,14 @@ const SplashScreen = () => {
     useEffect(() => {
         setTimeout(() => {
             hideSplashScreen();
-            navigation.navigate("onboarding");
-        },10000);
+            navigation.navigate("Onboarding");
+        },1000);
     }, []);
 
     const renderSplash = () => {
         return (
-            <View>
-                <View>
+            <View style={styles().SplashScreen_RootView}>
+                <View style={styles().SplashScreen_ChildView}>
                     <Image  source={require('../../assets/splash_icon_dark.png')} style={{width:150,height:150,resizeMode:'contain'}}/>
                 </View>
             </View>
@@ -30,7 +31,7 @@ const SplashScreen = () => {
     }
 
     return (
-        <View >
+        <View style={styles().MainContainer}>
             {isVisible === true ? renderSplash() : null}
         </View>
     );

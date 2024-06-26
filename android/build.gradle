@@ -13,9 +13,21 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle")
+        classpath("com.android.tools.build:gradle:4.1.2")
         classpath("com.facebook.react:react-native-gradle-plugin")
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            eachDependency {
+                // https://issuetracker.google.com/issues/109894262#comment9
+                if (requested.group == "org.jetbrains.trove4j" && requested.name == "trove4j" && requested.version == "20160824") {
+                    useTarget("org.jetbrains.intellij.deps:trove4j:1.0.20181211")
+                }
+            }
+        }
     }
 }
