@@ -1,7 +1,7 @@
 import {persistCombineReducers} from 'redux-persist';
 import Constants from '../../constants/index';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import exampleReducer from './exampleReducer';
+import authReducer from './authReducers';
 
 const config = {
     key: Constants.AsyncStorageKey,
@@ -12,7 +12,7 @@ const config = {
 
 
 const appReducer = persistCombineReducers(config, {
-    example: exampleReducer,
+    auth: authReducer
 });
 
 

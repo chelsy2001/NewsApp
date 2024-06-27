@@ -1,5 +1,5 @@
 //import liraries
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Image, View } from 'react-native';
 import {styles} from './styles';
@@ -8,6 +8,11 @@ import {styles} from './styles';
 const SplashScreen = () => {
     const [isVisible , setIsVisible] = useState(true)
     const navigation = useNavigation();
+
+    const theme = useTheme();
+    console.log(theme)
+
+    const {background,dark} = theme;
     
     const hideSplashScreen = () => {
         setIsVisible(false);
@@ -16,7 +21,7 @@ const SplashScreen = () => {
     useEffect(() => {
         setTimeout(() => {
             hideSplashScreen();
-            navigation.navigate("Onboarding");
+            navigation.navigate("Tab");
         },1000);
     }, []);
 
@@ -24,14 +29,14 @@ const SplashScreen = () => {
         return (
             <View style={styles().SplashScreen_RootView}>
                 <View style={styles().SplashScreen_ChildView}>
-                    <Image  source={require('../../assets/splash_icon_dark.png')} style={{width:150,height:150,resizeMode:'contain'}}/>
+                    <Image  source={ dark ? require('../../assets/splash_icon_dark.png') :require('../../assets/splash_icon_light.png')  } style={{width:150,height:150,resizeMode:'contain'}}/>
                 </View>
             </View>
         )
     }
 
     return (
-        <View style={styles().MainContainer}>
+        <View style={styles(background).MainContainer}>
             {isVisible === true ? renderSplash() : null}
         </View>
     );

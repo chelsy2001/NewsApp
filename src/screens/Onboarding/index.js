@@ -5,9 +5,14 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
 import {styles} from './styles';
-
+import { connect } from 'react-redux';
+import * as authAction from '../../redux/actions/authAction'
+import PropTypes from 'prop-types';
 // create a component
-const Onboarding = () => {
+const Onboarding = ({...props}) => {
+
+  const {updateOnboarding} = props;
+
     const navigation = useNavigation();
     const slides = [
         {
@@ -79,6 +84,7 @@ const Onboarding = () => {
       }
 
       const _onEndReached = () => {
+        updateOnboarding(true);
         navigation.navigate('Login');
       }
 
@@ -101,6 +107,20 @@ const Onboarding = () => {
     );
 };
 
+Onboarding.PropTypes = {
+  isOnboardingDisabled: PropTypes.bool.isRequired,
+  updateOnboarding: PropTypes.func.isRequired
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isOnboardingDisabled: state.auth.isOnboardingDisabled
+  }
+}
+
+const mapDispatchToProps = (dispatch) =>({
+  updateOnboarding: (status) => dispatch(authAction.updateOnboarding(status))
+})
 
 //make this component available to the app
-export default Onboarding;
+export default connect(mapStateToProps,mapDispatchToProps)(Onboarding);

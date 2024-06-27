@@ -3,11 +3,16 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import AuthStack from './AuthStack';
 import { NavigationContainer } from '@react-navigation/native';
+import constants from '../constants';
+
+
+const {MyDarkTheme,MyLightTheme} = constants
 
 // create a component
 const RootNavigation = () => {
+
     return (
-       <NavigationContainer>
+       <NavigationContainer theme={MyLightTheme}>
         <AuthStack/>
        </NavigationContainer>
     );
